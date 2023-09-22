@@ -7,6 +7,14 @@ import { Grafico } from '../grafico';
 
 function Info(props){
     const[infoMoedas, setInfoMoedas] = useState([]);
+    const [select, setSelect] = useState('daily/');
+    const [quantidade, setQuantidade] = useState(90);
+    const selecionarGrafico = (e) => {
+        setSelect(e.target.value)
+    }
+    const mudarQuantidade = (e) => {
+        setQuantidade(e.target.value)
+    }
     useEffect(() => {
         async function lerInformacoes(){
             const path = "last/" + props.moeda;
@@ -36,7 +44,20 @@ function Info(props){
                     <span className='espacamento'>Mínima: {infoMoedas[props.moeda.replace('-', '')].low}</span>
                     </p>
                 </div>
-                <Grafico moeda={props.moeda}/>
+                <div className='Tipo-Grafico'>
+                    <span>
+                        <label>Tipo do Gráfico: </label>
+                        <select id='tipo_grafico' value={select} onChange={selecionarGrafico}>
+                            <option value='daily/'>Fechamento diário</option>
+                            <option value=''>Cotações sequenciais</option>
+                        </select>
+                    </span>
+                    <span>
+                        <label>Quantidade: </label>
+                        <input type='number' value={quantidade} onChange={mudarQuantidade}></input>
+                    </span>
+                </div>
+                <Grafico moeda={props.moeda} tipo={select} quantidade={quantidade}/>
             </div>
         );
     }

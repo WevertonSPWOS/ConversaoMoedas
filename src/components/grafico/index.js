@@ -22,14 +22,14 @@ export function Grafico(props) {
     const[infoGrafico, setInfoGrafico] = useState([]);
     useEffect(() => {
         async function lerInformacoes(){
-            const path = "daily/" + props.moeda + "/90";
-            // api.js https://economia.awesomeapi.com.br/json/daily/:moeda/90 
+            const path = props.tipo + props.moeda + '/' + props.quantidade;
+            // api.js https://economia.awesomeapi.com.br/json/:tipo/:moeda/:quantidade
             const resposta = await api.get(path)
             setInfoGrafico(resposta.data);
         };
         
         lerInformacoes();
-    }, [props.moeda]);
+    }, [props.moeda, props.tipo, props.quantidade]);
     if (infoGrafico.length === 0 || (undefined in infoGrafico)){
         return(
             <h1>Carregando...</h1>
@@ -37,12 +37,21 @@ export function Grafico(props) {
         }
         else{
             const options = {
-                responsive: true
+                responsive: true,
+                scales: {
+                    yAxis: [
+                        {
+                            reverse: true
+
+                        }
+                    ]
+                }
             }
+
             const data = {
             labels: infoGrafico.map(() => ''),
             datasets: [{
-                label: 'teste',
+                label: 'Valorização',
                 data: infoGrafico.map((info) => parseFloat(info.bid)),
                 borderColor: '#336611',
                 pointBackgroundColor: '#558833',

@@ -1,6 +1,6 @@
 .Painel{
     background-color: #bbee99;
-    height: 100vh;
+    height: 50vw;
     width: 100%;
     padding: 15px;
     border: #aacc88 solid 2px;
@@ -13,5 +13,6 @@ p{
  justify-content: space-between;
  margin-left: 15px;
 };
+
 
 
