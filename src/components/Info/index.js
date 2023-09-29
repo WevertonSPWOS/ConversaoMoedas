@@ -45,17 +45,17 @@ function Info(props){
                     </p>
                 </div>
                 <div className='Tipo-Grafico'>
-                    <span>
+                    <div>
                         <label>Tipo do Gráfico: </label>
                         <select id='tipo_grafico' value={select} onChange={selecionarGrafico}>
                             <option value='daily/'>Fechamento diário</option>
                             <option value=''>Cotações sequenciais</option>
                         </select>
-                    </span>
-                    <span>
+                    </div>
+                    <div>
                         <label>Quantidade: </label>
                         <input type='number' value={quantidade} onChange={mudarQuantidade}></input>
-                    </span>
+                    </div>
                 </div>
                 <Grafico moeda={props.moeda} tipo={select} quantidade={quantidade}/>
             </div>
